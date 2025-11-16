@@ -1,6 +1,5 @@
 #def binary_sort (arr):
 
-
 def binary_search_sorted_array (arr, findMe):
     """
     Perform a Binary search of a sorted array of values to find if a single value is in the array.
@@ -31,3 +30,4 @@ def binary_search_sorted_array (arr, findMe):
             right = middle - 1
 
     return -1
+
