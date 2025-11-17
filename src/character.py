@@ -1,7 +1,10 @@
 '''
-Create a class for a character in DND. 
-Basically just create a cllass where i can initialize 
-all stats/health/class/name as a start.
+This is the Character object. This object holds information pertaining to a character in DnD, 
+things like the character's stats, race, class, etc. These stats can be pulled at any time and any related 
+modifiers are automatically updated.
+
+Jeremy Ellison
+Nov. 17, 2025
 
 '''
 
