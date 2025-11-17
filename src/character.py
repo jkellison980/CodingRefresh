@@ -69,8 +69,23 @@ class Character:
         return self._str_score
     
     @property
-    def str_modifier(self):
+    def dex_modifier(self):
         return self._str_modifier
+    
+    @dex_score.setter
+    def dex_score(self, score):
+        if score is not None and not isinstance(score, int):
+            raise TypeError("Dexterity score must be an integer")
+        self._dex_score = score
+        self._dex_modifier = self.calculate_modifier(score)
+
+    @property
+    def dex_score(self):
+        return self._dex_score
+    
+    @property
+    def dex_modifier(self):
+        return self._dex_modifier
     
     ############################################################
     def set_dex_score(self, dex_score):
