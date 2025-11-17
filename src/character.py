@@ -24,11 +24,34 @@ class Character:
             self.str_score = str_score
         
         #Dexterity
-        self.dex_score = None
-        self.con_score = None
-        self.int_score = None
-        self.wis_score = None
-        self.charisma_score = None
+        self._dex_score = None
+        self._dex_modifier = None
+        if dex_score is not None:
+            self.dex_score = dex_score
+        
+        #Constitution
+        self._con_score = None
+        self._con_modifier = None
+        if con_score is not None:
+            self.con_score = con_score
+
+        #Intelligence
+        self._int_score = None
+        self._int_modifier = None
+        if int_score is not None:
+            self.int_score = int_score
+
+        #Wisdom
+        self._wis_score = None
+        self._wis_modifier = None
+        if wis_score is not None:
+            self.wis_score = wis_score
+
+        #Charisma
+        self._charisma_score = None
+        self._charisma_modifier = None
+        if charisma_score is not None:
+            self.charisma_score = charisma_score
 
 
     def set_class(self, char_class):
@@ -56,7 +79,8 @@ class Character:
     ##############################################
     ############### Ability Scores ###############
     ##############################################
-
+    
+    #Strength
     @str_score.setter
     def str_score(self, score):
         if score is not None and not isinstance(score, int):
@@ -69,9 +93,10 @@ class Character:
         return self._str_score
     
     @property
-    def dex_modifier(self):
+    def str_modifier(self):
         return self._str_modifier
     
+    #Dexterity
     @dex_score.setter
     def dex_score(self, score):
         if score is not None and not isinstance(score, int):
@@ -87,26 +112,71 @@ class Character:
     def dex_modifier(self):
         return self._dex_modifier
     
-    ############################################################
-    def set_dex_score(self, dex_score):
-        if not isinstance(dex_score, int):
-            raise TypeError("dexterity score must be an integer")
-        self.dex_score = dex_score
-        
-    def set_con_score(self, con_score):
-        if not isinstance(con_score, int):
-            raise TypeError("constitution score must be an integer")
-        self.con_score = con_score
-        
-    def set_int_score(self, int_score):
-        if not isinstance(int_score, int):
-            raise TypeError("intelligence score must be an integer")
-        self.int_score = int_score
+    #Constitution
+    @con_score.setter
+    def con_score(self, score):
+        if score is not None and not isinstance(score, int):
+            raise TypeError("Constitution score must be an integer")
+        self._con_score = score
+        self._con_modifier = self.calculate_modifier(score)
+
+    @property
+    def con_score(self):
+        return self._con_score
     
-    def set_wis_score(self, wis_score):
-        if not isinstance(wis_score, int):
-            raise TypeError("wisdom score must be an integer")
-        self.wis_score = wis_score
+    @property
+    def con_modifier(self):
+        return self._con_modifier
+    
+    #Intelligence
+    @int_score.setter
+    def int_score(self, score):
+        if score is not None and not isinstance(score, int):
+            raise TypeError("Intelligence score must be an integer")
+        self._int_score = score
+        self._int_modifier = self.calculate_modifier(score)
+
+    @property
+    def int_score(self):
+        return self._int_score
+    
+    @property
+    def int_modifier(self):
+        return self._int_modifier
+    
+    #Wisdom
+    @wis_score.setter
+    def wis_score(self, score):
+        if score is not None and not isinstance(score, int):
+            raise TypeError("Wisdom score must be an integer")
+        self._wis_score = score
+        self._wis_modifier = self.calculate_modifier(score)
+
+    @property
+    def wis_score(self):
+        return self._wis_score
+    
+    @property
+    def wis_modifier(self):
+        return self._wis_modifier
+    
+    #Charisma
+    @charisma_score.setter
+    def charisma_score(self, score):
+        if score is not None and not isinstance(score, int):
+            raise TypeError("Charisma score must be an integer")
+        self._charisma_score = score
+        self._charisma_modifier = self.calculate_modifier(score)
+
+    @property
+    def charisma_score(self):
+        return self._charisma_score
+    
+    @property
+    def charisma_modifier(self):
+        return self._charisma_modifier
+    ############################################################
+
     
     def set_charisma_score(self, charisma_score):
         if not isinstance(charisma_score, int):
