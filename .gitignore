@@ -1,0 +1,14 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+#bytecode files
+__pycache__/
+*.pyc
+
+#Virtual Environment
+.venv/
+
+#VSCode Settings
+.vscode/
+
+#MacOS System Files
+.DS_Store
