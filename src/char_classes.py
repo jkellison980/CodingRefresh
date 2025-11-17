@@ -1,0 +1,1 @@
+#create character classes and the attributes with them that can be applied to the character

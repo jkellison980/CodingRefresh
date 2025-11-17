@@ -1,0 +1,1 @@
+#create classes that have each race and its attributes listed and able to be applied to the character attached to it
