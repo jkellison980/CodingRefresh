@@ -175,30 +175,6 @@ class Character:
     @property
     def charisma_modifier(self):
         return self._charisma_modifier
-    ############################################################
-
-    
-    def set_charisma_score(self, charisma_score):
-        if not isinstance(charisma_score, int):
-            raise TypeError("charisma score must be an integer")
-        self.charisma_score = charisma_score
-    
-    
-    
-    def get_dex_score(self):
-        return self.dex_score
-    
-    def get_charisma_score(self):
-        return self.charisma_score
-    
-    def get_int_score(self):
-        return self.int_score
-    
-    def get_wis_score(self):
-        return self.wis_score
-    
-    def get_con_score(self):
-        return self.con_score
     
     ##############################################
     ############### Static Methods ###############
