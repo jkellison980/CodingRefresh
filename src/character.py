@@ -12,51 +12,141 @@ class Character:
 
     def __init__(self,name, char_class=None,
                  age=None, race=None,
-                 str_score=None, dex_score=None, con_score=None,
-                 int_score=None, wis_score=None, charisma_score=None
+                 str_base=None, dex_base=None, con_base=None,
+                 int_base=None, wis_base=None, cha_base=None
                  ):
+        #Base Ability scores
+        self.base_str = str_base or 10
+        self.base_dex = dex_base or 10
+        self.base_con = con_base or 10
+        self.base_int = int_base or 10
+        self.base_wis = wis_base or 10
+        self.base_cha = cha_base or 10
+        
+        self.modifiers = {}
+        self.abilities = {}
         self.name = name
-        self.char_class = char_class
+        self.char_class = char_class #will need to update to resemble race once options are available
         self.set_age(age)
+
+        #Race
+        self.race = None
+        if race:
+            race.set_race(self)
+
+# ---------------- MODIFIER API ----------------
+    def add_modifier(self, stat, value, source):
+        self.modifiers.setdefault(stat, [])
+        self.modifiers[stat].append({"value": value, "source": source})
+
+    def remove_modifiers_from_source(self, source):
+        for stat in list(self.modifiers.keys()):
+            self.modifiers[stat] = [
+                m for m in self.modifiers[stat] if m["source"] != source
+            ]
+            if not self.modifiers[stat]:
+                del self.modifiers[stat]
+
+# ---------------- ABILITY API ----------------
+    def add_ability(self, name, value, source):
+        self.abilities[name] = {"value": value, "source": source}
+
+    def remove_abilities_from_source(self, source):
+        for name in list(self.abilities.keys()):
+            if self.abilities[name]["source"] == source:
+                del self.abilities[name]
+
+# ---------------- MANAGE RACE ----------------
+    def set_race(self, race):
+        #remove old race effects
+        if self.race:
+            self.race.remove_effects(self)
+        
+        #apply new race
         self.race = race
+        self.race.apply_effects(self)
 
-        #Strength
-        self._str_score = None
-        self._str_modifier = None
-        if str_score is not None:
-            self.str_score = str_score
+# ---------------- ABILITY SCORES ----------------
+
+    @property
+    def str_score(self):
+        total = self.base_str
+        for x in self.modifiers.get("str_score", []):
+            total += x["value"]
+        return total
+    
+    @property
+    def dex_score(self):
+        total = self.base_dex
+        for x in self.modifiers.get("dex_score", []):
+            total += x["value"]
+        return total
+    
+    @property
+    def con_score(self):
+        total = self.base_con
+        for x in self.modifiers.get("con_score", []):
+            total += x["value"]
+        return total
+    
+    @property
+    def int_score(self):
+        total = self.base_int
+        for x in self.modifiers.get("int_score", []):
+            total += x["value"]
+        return total
+    
+    @property
+    def wis_score(self):
+        total = self.base_wis
+        for x in self.modifiers.get("wis_score", []):
+            total += x["value"]
+        return total
+    
+    @property
+    def cha_score(self):
+        total = self.base_cha
+        for x in self.modifiers.get("cha_score", []):
+            total += x["value"]
+        return total
+    
+# ---------------- MODIFIER CALCULATION ----------------
+    @staticmethod
+    def calculate_modifier(score):
+        if score < 1:
+            raise ValueError("Score needs to be an integer above 1")
+        if score > 30:
+            score = 30
         
-        #Dexterity
-        self._dex_score = None
-        self._dex_modifier = None
-        if dex_score is not None:
-            self.dex_score = dex_score
-        
-        #Constitution
-        self._con_score = None
-        self._con_modifier = None
-        if con_score is not None:
-            self.con_score = con_score
+        return (score - 10) // 2
 
-        #Intelligence
-        self._int_score = None
-        self._int_modifier = None
-        if int_score is not None:
-            self.int_score = int_score
+    #Ability Modifiers
+    @property
+    def str_modifier(self):
+        return Character.calculate_modifier(self.str_score)
+    
+    @property
+    def dex_modifier(self):
+        return Character.calculate_modifier(self.dex_score)
+    
+    @property
+    def con_modifier(self):
+        return Character.calculate_modifier(self.con_score)
+    
+    @property
+    def int_modifier(self):
+        return Character.calculate_modifier(self.int_score)
+    
+    @property
+    def wis_modifier(self):
+        return Character.calculate_modifier(self.wis_score)
+    
+    @property
+    def cha_modifier(self):
+        return Character.calculate_modifier(self.cha_score)
+    
 
-        #Wisdom
-        self._wis_score = None
-        self._wis_modifier = None
-        if wis_score is not None:
-            self.wis_score = wis_score
-
-        #Charisma
-        self._charisma_score = None
-        self._charisma_modifier = None
-        if charisma_score is not None:
-            self.charisma_score = charisma_score
-
-
+# ------------------------------------------------
     def set_class(self, char_class):
         #To Do: validate input from list of valid options
         self.char_class = char_class
@@ -65,10 +155,6 @@ class Character:
         if not isinstance(age, int):
             raise TypeError("age must be an integer")
         self.age = age
-    
-    def set_race(self, race):
-        #To Do: Validate input from list of valid options
-        self.race = race
 
     def get_class(self):
         return self.char_class
@@ -76,118 +162,3 @@ class Character:
     def get_age(self):
         return self.age
     
-    def get_race(self):
-        return self.race
-    
-    ##############################################
-    ############### Ability Scores ###############
-    ##############################################
-    
-    #Strength
-    @str_score.setter
-    def str_score(self, score):
-        if score is not None and not isinstance(score, int):
-            raise TypeError("Strength score must be an integer")
-        self._str_score = score
-        self.str_modifier = self.calculate_modifier(score)
-
-    @property
-    def str_score(self):
-        return self._str_score
-    
-    @property
-    def str_modifier(self):
-        return self._str_modifier
-    
-    #Dexterity
-    @dex_score.setter
-    def dex_score(self, score):
-        if score is not None and not isinstance(score, int):
-            raise TypeError("Dexterity score must be an integer")
-        self._dex_score = score
-        self._dex_modifier = self.calculate_modifier(score)
-
-    @property
-    def dex_score(self):
-        return self._dex_score
-    
-    @property
-    def dex_modifier(self):
-        return self._dex_modifier
-    
-    #Constitution
-    @con_score.setter
-    def con_score(self, score):
-        if score is not None and not isinstance(score, int):
-            raise TypeError("Constitution score must be an integer")
-        self._con_score = score
-        self._con_modifier = self.calculate_modifier(score)
-
-    @property
-    def con_score(self):
-        return self._con_score
-    
-    @property
-    def con_modifier(self):
-        return self._con_modifier
-    
-    #Intelligence
-    @int_score.setter
-    def int_score(self, score):
-        if score is not None and not isinstance(score, int):
-            raise TypeError("Intelligence score must be an integer")
-        self._int_score = score
-        self._int_modifier = self.calculate_modifier(score)
-
-    @property
-    def int_score(self):
-        return self._int_score
-    
-    @property
-    def int_modifier(self):
-        return self._int_modifier
-    
-    #Wisdom
-    @wis_score.setter
-    def wis_score(self, score):
-        if score is not None and not isinstance(score, int):
-            raise TypeError("Wisdom score must be an integer")
-        self._wis_score = score
-        self._wis_modifier = self.calculate_modifier(score)
-
-    @property
-    def wis_score(self):
-        return self._wis_score
-    
-    @property
-    def wis_modifier(self):
-        return self._wis_modifier
-    
-    #Charisma
-    @charisma_score.setter
-    def charisma_score(self, score):
-        if score is not None and not isinstance(score, int):
-            raise TypeError("Charisma score must be an integer")
-        self._charisma_score = score
-        self._charisma_modifier = self.calculate_modifier(score)
-
-    @property
-    def charisma_score(self):
-        return self._charisma_score
-    
-    @property
-    def charisma_modifier(self):
-        return self._charisma_modifier
-    
-    ##############################################
-    ############### Static Methods ###############
-    ##############################################
-    @staticmethod
-    def calculate_modifier(score):
-        if score < 1 or score > 30:
-            raise ValueError("Score needs to be an integer between 1 and 30.")
-        
-        return (score - 10) // 2
-    
-    def __str__(self):
-        return f"{self.name}\n{self.race} | {self.char_class}\n{self.age}"
