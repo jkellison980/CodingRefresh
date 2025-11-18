@@ -27,15 +27,22 @@ Feats
     TBD
 '''
 class Human(Race):
+    bonuses = {
+        "str_score": 1,
+        "dex_score": 1,
+        "wis_score": 1
+    }
+    abilities = {}
+
     def apply_effects(self, character):
-        character.str_score += 1
-        character.dex_score += 1
-        character.wis_score += 1
+        for stat, value in self.bonuses.items():
+            character.add_modifier(stat, value, source="Human")
+        for ability, value in self.abilities.items():
+            character.add_ability(ability, value, source="Human")
     
     def remove_effects(self, character):
-        character.str_score -= 1
-        character.dex_score -= 1
-        character.wis_score -= 1
+        character.remove_modifiers_from_source("Human")
+        character.remove_abilities_from_source("Human")
 
 
 '''
@@ -51,13 +58,23 @@ Feats
     TBD
 '''
 class Elf(Race):
-    def apply_effects(self, character):
-        character.dex_score += 2
-        character.int_score += 1
+    bonuses = {
+        "dex_score": 2,
+        "int_score": 1
+    }
+    abilities = {
+        "darkvision": True
+    }
 
+    def apply_effects(self, character):
+        for stat, value in self.bonuses.items():
+            character.add_modifier(stat, value, source="Elf")
+        for ability, value in self.abilities.items():
+            character.add_ability(ability, value, source="Elf")
+    
     def remove_effects(self, character):
-        character.dex_score -= 2
-        character.int_score -= 1
+        character.remove_modifiers_from_source("Elf")
+        character.remove_abilities_from_source("Elf")
 
 
 '''
@@ -73,10 +90,20 @@ Feats
     TBD
 '''
 class Dwarf(Race):
+    bonuses = {
+        "con_score": 2,
+        "str_score": 1
+    }
+    abilities = {
+        "darkvision": True
+    }
+
     def apply_effects(self, character):
-        character.str_score += 1
-        character.con_score += 1
+        for stat, value in self.bonuses.items():
+            character.add_modifier(stat, value, source="Dwarf")
+        for ability, value in self.abilities.items():
+            character.add_ability(ability, value, source="Dwarf")
     
     def remove_effects(self, character):
-        character.str_score -= 1
-        character.con_score -= 1
+        character.remove_modifiers_from_source("Dwarf")
+        character.remove_abilities_from_source("Dwarf")
