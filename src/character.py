@@ -40,11 +40,17 @@ class Character:
     def set_race(self, race_obj):
         self.race = race_obj
         race_obj.apply_to_character(self)
+    
+    def get_race(self):
+        return self.race
 
 # ---------------- MANAGE CLASS ----------------
     def set_character_class(self, character_class_object):
         self.character_class = character_class_object
         character_class_object.apply_to_character(self)
+
+    def get_character_class(self):
+        return self.character_class
 
 # ---------------- ABILITY SCORES ----------------
     def set_ability(self,key:str,new_value:int):
@@ -98,15 +104,4 @@ class Character:
     @property
     def cha_modifier(self):
         return self.abilities["cha"].modifier
-    
-
-# ------------------------------------------------
-    def set_class(self, char_class):
-        #To Do: validate input from list of valid options
-        self.char_class = char_class
-
-    def get_class(self):
-        return self.char_class
-    
-
     

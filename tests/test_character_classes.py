@@ -9,14 +9,7 @@ class DummyCharacter(Character):
     def __init__(self):
         # Create a simple abilities dict with Ability objects
         self.abilities = {key: Ability(key) for key in ["str","dex","con","int","wis","cha"]}
-        # Placeholder for any boolean abilities
-        self.darkvision = False
-        self.swingsword = False
-        self.sentinal = False
-        self.eldritchblast = False
-        self.warmage = False
-        self.pet = False
-        self.sniper = False
+        # Boolean abilities do not need prior placeholders, they are instantiated upon calling
 
 class TestCharacterClasses(unittest.TestCase):
 
@@ -42,7 +35,6 @@ class TestCharacterClasses(unittest.TestCase):
         ranger.apply_to_character(self.char)
         # Test special ability applied
         self.assertTrue(self.char.pet)
-        print (self.char)
         self.assertTrue(self.char.sniper)
 
 if __name__ == "__main__":

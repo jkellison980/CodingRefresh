@@ -3,18 +3,13 @@ from src import Ability
 from src import Character
 from src import Race, Human, Elf, Dwarf
 
-class DummyCharacter(Character):
-    """A minimal Character class for testing Race."""
-    def __init__(self):
-        # Create a simple abilities dict with Ability objects
-        self.abilities = {key: Ability(key) for key in ["str","dex","con","int","wis","cha"]}
-        # Placeholder for any boolean abilities
-        self.darkvision = False
-
 class TestRaces(unittest.TestCase):
 
     def setUp(self):
-        self.char = DummyCharacter()
+        self.char = Character(name="TestChar",
+                              str_base=10,dex_base=10,con_base=10,
+                              int_base=10,wis_base=10,cha_base=10
+    )
 
     def test_human_ability_bonuses(self):
         human = Human()
@@ -54,6 +49,29 @@ class TestRaces(unittest.TestCase):
         self.assertEqual(self.char.abilities["con"].modifier, 1)
         # Test special ability applied
         self.assertTrue(self.char.darkvision)
+    
+    def test_get_race(self):
+        dwarf = Dwarf()
+        human = Human()
+        elf = Elf()
+
+        # check initial state
+        self.assertIsNone(self.char.get_race())
+
+        # Apply Dwarf Race and test
+        self.char.set_race(dwarf)
+        self.assertEqual(self.char.get_race(), dwarf)
+        self.assertIsInstance(self.char.get_race(), Dwarf)
+
+        # Apply human race and test
+        self.char.set_race(human)
+        self.assertEqual(self.char.get_race(), human)
+        self.assertIsInstance(self.char.get_race(), Human)
+
+        # Apply elf race and test
+        self.char.set_race(elf)
+        self.assertEqual(self.char.get_race(), elf)
+        self.assertIsInstance(self.char.get_race(), Elf)
 
 if __name__ == "__main__":
     unittest.main()

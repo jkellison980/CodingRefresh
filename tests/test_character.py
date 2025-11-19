@@ -1,6 +1,9 @@
 #python3 -m unittest -v tests.test_character 
 import unittest
-from src import Character, Ability
+from src import Ability
+from src import Character
+from src import Race, Human, Elf, Dwarf
+from src import Character_class, Fighter, Warlock, Ranger
 
 # ----------------------------------------
 # Mock Race for Testing
@@ -52,12 +55,12 @@ class CharacterTests(unittest.TestCase):
         self.assertIs(c.race, race)
 
     # ---------- CLASS SET/GET ----------
-    def test_set_get_class(self):
-        c = Character("Classy", char_class="Fighter")
-        self.assertEqual(c.get_class(), "Fighter")
+    def test_set_get_character_class(self):
+        c = Character("Classy", character_class=Fighter())
+        self.assertIsInstance(c.get_character_class(), Fighter)
 
-        c.set_class("Wizard")
-        self.assertEqual(c.get_class(), "Wizard")
+        c.set_character_class(Warlock())
+        self.assertIsInstance(c.get_character_class(), Warlock)
 
 
 if __name__ == "__main__":
