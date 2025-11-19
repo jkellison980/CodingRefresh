@@ -1,44 +1,63 @@
+#python3 -m unittest -v tests.test_character 
 import unittest
-from src.character import Character 
+from src import Character, Ability
+
+# ----------------------------------------
+# Mock Race for Testing
+# ----------------------------------------
+class MockRace:
+    """Simple test race that adds +2 STR and +1 DEX."""
+    def apply_to_character(self, character):
+        character.abilities["str"].base += 2
+        character.abilities["dex"].base += 1
 
 
-class TestCharacter(unittest.TestCase):
+class CharacterTests(unittest.TestCase):
 
-    def test_initialization(self):
-        char = Character("Aragorn", char_class="Ranger", age=87, race="Human")
-        self.assertEqual(char.name, "Aragorn")
-        self.assertEqual(char.get_class(), "Ranger")
-        self.assertEqual(char.get_age(), 87)
-        self.assertEqual(char.get_race(), "Human")
+    # ---------- BASIC INIT TEST ----------
+    def test_character_initialization(self):
+        c = Character(
+            name="Testy",
+            str_base=15, dex_base=14, con_base=13,
+            int_base=12, wis_base=10, cha_base=8
+        )
 
-    def test_setters(self):
-        char = Character("Legolas")
-        char.set_class("Archer")
-        char.set_age(2931)
-        char.set_race("Elf")
+        self.assertEqual(c.name, "Testy")
+        self.assertEqual(c.str_score, 15)
+        self.assertEqual(c.dex_score, 14)
+        self.assertEqual(c.con_score, 13)
+        self.assertEqual(c.int_score, 12)
+        self.assertEqual(c.wis_score, 10)
+        self.assertEqual(c.cha_score, 8)
 
-        self.assertEqual(char.get_class(), "Archer")
-        self.assertEqual(char.get_age(), 2931)
-        self.assertEqual(char.get_race(), "Elf")
+    # ---------- ABILITY MODIFIER TEST ----------
+    def test_modifiers(self):
+        c = Character("ModTester", str_base=16)  # +3 mod
+        
+        self.assertEqual(c.str_modifier, 3)
 
-    def test_getters_with_initial_none(self):
-        char = Character("Gimli")
-        self.assertIsNone(char.get_class())
-        self.assertIsNone(char.get_age())
-        self.assertIsNone(char.get_race())
+        c.set_ability("str", 9)  # should become -1
+        self.assertEqual(c.str_modifier, -1)
 
-    def test_str_representation(self):
-        char = Character("Frodo", char_class="Ringbearer", age=50, race="Hobbit")
-        expected_str = "Frodo\nHobbit | Ringbearer\n50"
-        self.assertEqual(str(char), expected_str)
+    # ---------- TEST RACE APPLICATION ----------
+    def test_set_race(self):
+        race = MockRace()
+        c = Character("RaceTester", str_base=10, dex_base=10)
 
-    def test_partial_initialization(self):
-        # Only name given, others default to None
-        char = Character("Boromir")
-        self.assertEqual(char.name, "Boromir")
-        self.assertIsNone(char.get_class())
-        self.assertIsNone(char.get_age())
-        self.assertIsNone(char.get_race())
+        c.set_race(race)
+
+        # Race should modify the ability scores
+        self.assertEqual(c.str_score, 12)
+        self.assertEqual(c.dex_score, 11)
+        self.assertIs(c.race, race)
+
+    # ---------- CLASS SET/GET ----------
+    def test_set_get_class(self):
+        c = Character("Classy", char_class="Fighter")
+        self.assertEqual(c.get_class(), "Fighter")
+
+        c.set_class("Wizard")
+        self.assertEqual(c.get_class(), "Wizard")
 
 
 if __name__ == "__main__":

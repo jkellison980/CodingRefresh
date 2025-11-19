@@ -7,79 +7,52 @@ Jeremy Ellison
 Nov. 17, 2025
 
 '''
-
+from .ability import Ability
+from .races import Race #not technically needed at present, but could be useful later on
 class Character:
 
-    def __init__(self,name, char_class=None,
-                 age=None, race=None,
-                 str_base=None, dex_base=None, con_base=None,
-                 int_base=None, wis_base=None, cha_base=None
+    def __init__(self,name, char_class=None, race=None,
+                 str_base=10, dex_base=10, con_base=10,
+                 int_base=10, wis_base=10, cha_base=10
                  ):
         #Base Ability scores
         self.abilities = {
             "str": Ability("Strength", str_base),
             "dex": Ability("Dexterity", dex_base),
-            "con": Ability("Dexterity", con_base),
-            "int": Ability("Dexterity", int_base),
-            "wis": Ability("Dexterity", wis_base),
-            "cha": Ability("Dexterity", cha_base),
+            "con": Ability("Constitution", con_base),
+            "int": Ability("Intelligence", int_base),
+            "wis": Ability("Wisdom", wis_base),
+            "cha": Ability("Charisma", cha_base),
         }
-        #self.base_str = str_base or 10
-        #self.base_dex = dex_base or 10
-        #self.base_con = con_base or 10
-        #self.base_int = int_base or 10
-        #self.base_wis = wis_base or 10
-        #self.base_cha = cha_base or 10
-        
-        #self.modifiers = {}
-        self.abilities = {}
+
         self.name = name
         self.char_class = char_class #will need to update to resemble race once options are available
-        self.set_age(age)
 
         #Race
         self.race = None
         if race:
-            race.set_race(self)
+            self.set_race(race)
 
-# ---------------- MODIFIER API ----------------
-    def add_modifier(self, stat, value, source):
-        self.modifiers.setdefault(stat, [])
-        self.modifiers[stat].append({"value": value, "source": source})
-
-    def remove_modifiers_from_source(self, source):
-        for stat in list(self.modifiers.keys()):
-            self.modifiers[stat] = [
-                m for m in self.modifiers[stat] if m["source"] != source
-            ]
-            if not self.modifiers[stat]:
-                del self.modifiers[stat]
-
-# ---------------- ABILITY API ----------------
-    def add_ability(self, name, value, source):
-        self.abilities[name] = {"value": value, "source": source}
-
-    def remove_abilities_from_source(self, source):
-        for name in list(self.abilities.keys()):
-            if self.abilities[name]["source"] == source:
-                del self.abilities[name]
 
 # ---------------- MANAGE RACE ----------------
     def set_race(self, race_obj):
         self.race = race_obj
         race_obj.apply_to_character(self)
 
-''' 
-    def set_race(self, race):
-        #remove old race effects
-        if self.race:
-            self.race.remove_effects(self)
-        
-        #apply new race
-        self.race = race
-        self.race.apply_effects(self)
-'''
+
+#    def set_race(self, race):
+#        #remove old race effects
+#        if self.race:
+#            self.race.remove_effects(self)
+#        
+#        #apply new race
+#        self.race = race
+#        self.race.apply_effects(self)
+
 # ---------------- ABILITY SCORES ----------------
+    def set_ability(self,key:str,new_value:int):
+        self.abilities[key].base = new_value
+        
     @property
     def str_score(self):
         return self.abilities["str"].score
@@ -135,14 +108,8 @@ class Character:
         #To Do: validate input from list of valid options
         self.char_class = char_class
 
-    def set_age(self, age):
-        if not isinstance(age, int):
-            raise TypeError("age must be an integer")
-        self.age = age
-
     def get_class(self):
         return self.char_class
     
-    def get_age(self):
-        return self.age
+
     

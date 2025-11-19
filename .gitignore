@@ -2,6 +2,7 @@
 
 #bytecode files
 __pycache__/
+**/__pycache__/
 *.pyc
 
 #Virtual Environment
@@ -12,3 +13,6 @@ __pycache__/
 
 #MacOS System Files
 .DS_Store
+
+#Testing Files
+run_tests.sh

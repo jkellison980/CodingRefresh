@@ -12,7 +12,6 @@ class Race:
     def apply_to_character(self, character):
         for ability, bonus in self.ability_bonuses.items():
             character.abilities[ability].score += bonus
-            character.abilities[ability].update_modifier()
         
         for ability in self.abilities:
             setattr(character, ability, True)
