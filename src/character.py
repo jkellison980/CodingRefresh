@@ -11,7 +11,7 @@ from .ability import Ability
 from .races import Race #not technically needed at present, but could be useful later on
 class Character:
 
-    def __init__(self,name, char_class=None, race=None,
+    def __init__(self,name, character_class=None, race=None,
                  str_base=10, dex_base=10, con_base=10,
                  int_base=10, wis_base=10, cha_base=10
                  ):
@@ -26,7 +26,9 @@ class Character:
         }
 
         self.name = name
-        self.char_class = char_class #will need to update to resemble race once options are available
+        self.character_class = None
+        if character_class:
+            self.set_character_class(character_class)
 
         #Race
         self.race = None
@@ -39,15 +41,10 @@ class Character:
         self.race = race_obj
         race_obj.apply_to_character(self)
 
-
-#    def set_race(self, race):
-#        #remove old race effects
-#        if self.race:
-#            self.race.remove_effects(self)
-#        
-#        #apply new race
-#        self.race = race
-#        self.race.apply_effects(self)
+# ---------------- MANAGE CLASS ----------------
+    def set_character_class(self, character_class_object):
+        self.character_class = character_class_object
+        character_class_object.apply_to_character(self)
 
 # ---------------- ABILITY SCORES ----------------
     def set_ability(self,key:str,new_value:int):
