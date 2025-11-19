@@ -16,14 +16,22 @@ class Character:
                  int_base=None, wis_base=None, cha_base=None
                  ):
         #Base Ability scores
-        self.base_str = str_base or 10
-        self.base_dex = dex_base or 10
-        self.base_con = con_base or 10
-        self.base_int = int_base or 10
-        self.base_wis = wis_base or 10
-        self.base_cha = cha_base or 10
+        self.abilities = {
+            "str": Ability("Strength", str_base),
+            "dex": Ability("Dexterity", dex_base),
+            "con": Ability("Dexterity", con_base),
+            "int": Ability("Dexterity", int_base),
+            "wis": Ability("Dexterity", wis_base),
+            "cha": Ability("Dexterity", cha_base),
+        }
+        #self.base_str = str_base or 10
+        #self.base_dex = dex_base or 10
+        #self.base_con = con_base or 10
+        #self.base_int = int_base or 10
+        #self.base_wis = wis_base or 10
+        #self.base_cha = cha_base or 10
         
-        self.modifiers = {}
+        #self.modifiers = {}
         self.abilities = {}
         self.name = name
         self.char_class = char_class #will need to update to resemble race once options are available
@@ -57,6 +65,11 @@ class Character:
                 del self.abilities[name]
 
 # ---------------- MANAGE RACE ----------------
+    def set_race(self, race_obj):
+        self.race = race_obj
+        race_obj.apply_to_character(self)
+
+''' 
     def set_race(self, race):
         #remove old race effects
         if self.race:
@@ -65,85 +78,56 @@ class Character:
         #apply new race
         self.race = race
         self.race.apply_effects(self)
-
+'''
 # ---------------- ABILITY SCORES ----------------
-
     @property
     def str_score(self):
-        total = self.base_str
-        for x in self.modifiers.get("str_score", []):
-            total += x["value"]
-        return total
+        return self.abilities["str"].score
     
     @property
     def dex_score(self):
-        total = self.base_dex
-        for x in self.modifiers.get("dex_score", []):
-            total += x["value"]
-        return total
+        return self.abilities["dex"].score
     
     @property
     def con_score(self):
-        total = self.base_con
-        for x in self.modifiers.get("con_score", []):
-            total += x["value"]
-        return total
+        return self.abilities["con"].score
     
     @property
     def int_score(self):
-        total = self.base_int
-        for x in self.modifiers.get("int_score", []):
-            total += x["value"]
-        return total
+        return self.abilities["int"].score
     
     @property
     def wis_score(self):
-        total = self.base_wis
-        for x in self.modifiers.get("wis_score", []):
-            total += x["value"]
-        return total
+        return self.abilities["wis"].score
     
     @property
     def cha_score(self):
-        total = self.base_cha
-        for x in self.modifiers.get("cha_score", []):
-            total += x["value"]
-        return total
+        return self.abilities["cha"].score
     
-# ---------------- MODIFIER CALCULATION ----------------
-    @staticmethod
-    def calculate_modifier(score):
-        if score < 1:
-            raise ValueError("Score needs to be an integer above 1")
-        if score > 30:
-            score = 30
-        
-        return (score - 10) // 2
-
-    #Ability Modifiers
+# ---------------- MODIFIER GETTERS ----------------
     @property
     def str_modifier(self):
-        return Character.calculate_modifier(self.str_score)
+        return self.abilities["str"].modifier
     
     @property
     def dex_modifier(self):
-        return Character.calculate_modifier(self.dex_score)
+        return self.abilities["dex"].modifier
     
     @property
     def con_modifier(self):
-        return Character.calculate_modifier(self.con_score)
+        return self.abilities["con"].modifier
     
     @property
     def int_modifier(self):
-        return Character.calculate_modifier(self.int_score)
+        return self.abilities["int"].modifier
     
     @property
     def wis_modifier(self):
-        return Character.calculate_modifier(self.wis_score)
+        return self.abilities["wis"].modifier
     
     @property
     def cha_modifier(self):
-        return Character.calculate_modifier(self.cha_score)
+        return self.abilities["cha"].modifier
     
 
 # ------------------------------------------------
