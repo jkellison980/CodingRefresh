@@ -36,8 +36,10 @@ class Human(Race):
     def __init__(self):
         super().__init__(
                 ability_bonuses={"str": 1,"dex": 1,"con": 0,
-                                "int": 1,"wis": 1,"cha":0},
-                traits = []
+                                "int": 0,"wis": 1,"cha":0},
+                traits = [
+
+                ]
             )
 
 '''
@@ -57,7 +59,10 @@ class Elf(Race):
         super().__init__(
             ability_bonuses={"str": 0,"dex": 2,"con": 0,
                             "int": 1,"wis": 0,"cha":0},
-            traits = ["Darkvision"]
+            traits = [
+                "Darkvision",
+                "Fey Ancestry"
+                ]
         )
 
 
@@ -78,6 +83,9 @@ class Dwarf(Race):
         super().__init__(
                 ability_bonuses={"str": 1,"dex": 0,"con": 2,
                                 "int": 0,"wis": 0,"cha":0},
-                traits = ["Darkvision"]
+                traits = [
+                    "Darkvision",
+                    "Stoneskin"
+                    ]
             )
 

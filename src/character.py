@@ -28,7 +28,7 @@ class Character:
         #Traits
         self.traits = {}
 
-        
+        self.items = {}
 
         self.name = name
         self.character_class = None

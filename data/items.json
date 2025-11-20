@@ -1,0 +1,44 @@
+{
+    "shortsword": {
+        "name": "Shortsword",
+        "type": "weapon",
+        "rarity": "common",
+        "description": "A basic shortsword.",
+        "value": 20,
+        "stats": {
+            "damage": "1d8"
+        }
+    },
+
+    "healing_potion": {
+    "name": "Healing Potion",
+    "type": "consumable",
+    "rarity": "common",
+    "description": "Restores a small amount of health.",
+    "value": 50,
+    "effects": {
+      "heal": 10
+    }
+  },
+
+  "longsword": {
+    "name": "Longsword",
+    "type": "weapon",
+    "rarity": "uncommon",
+    "description": "A well-crafted steel longsword.",
+    "value": 150,
+    "stats": {
+      "damage": "1d8",
+      "properties": ["versatile"]
+    }
+  },
+
+  "chain_mail": {
+    "name": "Chain Mail",
+    "type": "armor",
+    "rarity": "common",
+    "value": 75,
+    "AC": 16,
+    "stealth_disadvantage": true
+  }
+}

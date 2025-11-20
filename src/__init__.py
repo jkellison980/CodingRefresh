@@ -1,5 +1,7 @@
 # src/__init__.py
 from .ability import Ability
 from .character import Character
-from .races import Race, Human, Elf, Dwarf
-from .character_classes import Character_class, Fighter, Warlock, Ranger
+from .races import all
+from .character_classes import all
+from .items import Item
+from .item_import import all
