@@ -24,6 +24,11 @@ class Character:
             "wis": Ability("Wisdom", wis_base),
             "cha": Ability("Charisma", cha_base),
         }
+        
+        #Traits
+        self.traits = {}
+
+        
 
         self.name = name
         self.character_class = None
@@ -105,3 +110,31 @@ class Character:
     def cha_modifier(self):
         return self.abilities["cha"].modifier
     
+# ---------------- STRING FORMATTER ----------------
+
+    def __str__(self):
+        
+        def fmt_mod(value):
+            return f"{value:+d}"
+
+        abilities_str = "\n".join(
+            f"  {ability_obj.name:<12} {ability_obj.score:>2}  ({fmt_mod(ability_obj.modifier)})"
+            for key, ability_obj in self.abilities.items()
+        )
+
+        traits_str = "\n".join(
+            f"  {trait}" for trait in self.traits
+        )
+
+        race_name = self.race.__class__.__name__ if self.race else "None"
+        class_name = self.character_class.__class__.__name__ if self.character_class else "None"
+
+        return (
+            f"Character Sheet\n"
+            f"-----------------------------\n"
+            f"Name: {self.name}\n"
+            f"Race: {race_name}\n"
+            f"Class: {class_name}\n\n"
+            f"Abilities:\n{abilities_str}\n\n"
+            f"Traits: \n{traits_str}"
+        )

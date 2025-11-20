@@ -6,15 +6,17 @@ Nov. 18, 2025
 '''
 
 class Race:
-    ability_bonuses = []
-    abilities = []
+    def __init__(self, ability_bonuses=None, traits=None):
+        self.ability_bonuses = ability_bonuses or {}
+        self.traits = traits or []
+
 
     def apply_to_character(self, character):
         for ability, bonus in self.ability_bonuses.items():
             character.abilities[ability].score += bonus
         
-        for ability in self.abilities:
-            setattr(character, ability, True)
+        for trait in self.traits:
+            character.traits[trait] = True
 
 
 '''
@@ -31,10 +33,12 @@ Feats
     TBD
 '''
 class Human(Race):
-    ability_bonuses = {"str": 1,"dex": 1,"con": 0,
-                       "int": 0,"wis": 1,"cha":0}
-    abilities = []
-
+    def __init__(self):
+        super().__init__(
+                ability_bonuses={"str": 1,"dex": 1,"con": 0,
+                                "int": 1,"wis": 1,"cha":0},
+                traits = []
+            )
 
 '''
 Elf Race
@@ -49,9 +53,12 @@ Feats
     TBD
 '''
 class Elf(Race):
-    ability_bonuses = {"str": 0,"dex": 2,"con": 0,
-                       "int": 1,"wis": 0,"cha":0}
-    abilities = ["darkvision"]
+    def __init__(self):
+        super().__init__(
+            ability_bonuses={"str": 0,"dex": 2,"con": 0,
+                            "int": 1,"wis": 0,"cha":0},
+            traits = ["Darkvision"]
+        )
 
 
 '''
@@ -67,6 +74,10 @@ Feats
     TBD
 '''
 class Dwarf(Race):
-    ability_bonuses = {"str": 1,"dex": 0,"con": 2,
-                       "int": 0,"wis": 0,"cha":0}
-    abilities = ["darkvision"]
+    def __init__(self):
+        super().__init__(
+                ability_bonuses={"str": 1,"dex": 0,"con": 2,
+                                "int": 0,"wis": 0,"cha":0},
+                traits = ["Darkvision"]
+            )
+

@@ -1,14 +1,20 @@
-import reference_functions as rf
-import character
-
+from src import Ability
+from src import Character
+from src import Race, Human, Elf, Dwarf
+from src import Character_class, Fighter, Warlock, Ranger
 
 name = "Jeremy"
-race = "Tiefling"
-race2 = "Human"
-char_class = "Fighter"
-char_class2 = "Ranger"
-age = 23
-age2 = 33
 
-char1 = character.Character(name,char_class,age,race)
-print (f"{char1}")
+char1 = Character(
+    name=name,
+    character_class=Fighter(),
+    race=Human()
+)
+char2 = Character(
+    name=name,
+    character_class=Warlock(),
+    race=Elf()
+)
+
+print(char1)
+print(char2)
