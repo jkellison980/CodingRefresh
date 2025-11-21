@@ -16,4 +16,4 @@ __pycache__/
 
 #Testing Files
 run_tests.sh
-test.output.txt
+test_output.txt

@@ -35,7 +35,7 @@ class TestRaces(unittest.TestCase):
         self.assertEqual(self.char.abilities["dex"].modifier, 1)
         self.assertEqual(self.char.abilities["int"].modifier, 0)
         # Test special ability applied
-        self.assertTrue(self.char.darkvision)
+        self.assertTrue(self.char.traits["Darkvision"])
 
     def test_dwarf_ability_bonuses_and_abilities(self):
         dwarf = Dwarf()
@@ -48,7 +48,7 @@ class TestRaces(unittest.TestCase):
         self.assertEqual(self.char.abilities["str"].modifier, 0)
         self.assertEqual(self.char.abilities["con"].modifier, 1)
         # Test special ability applied
-        self.assertTrue(self.char.darkvision)
+        self.assertTrue(self.char.traits["Darkvision"])
     
     def test_get_race(self):
         dwarf = Dwarf()
