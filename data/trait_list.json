@@ -1,0 +1,50 @@
+{
+    "abilities": [
+        {
+            "id": "0",
+            "name": "Trait or Ability Name",
+            "source": "race | class | feat | item | other",
+            "description": "Flavor text and narrative description of this trait.",
+
+            "properties": {
+                "passive": true,
+                "active": false,
+                "uses": null,
+                "recharge": null
+            },
+
+            "mechanics": {
+                "advantage_on": [],
+                "disadvantage_on": [],
+                "immunities": [],
+                "resistances": [],
+                "conditions": [],
+                "bonus_saves": {},
+                "bonus_skills": {}
+            }
+        },
+        {
+            "id": "unique_trait_id",
+            "name": "Trait or Ability Name",
+            "source": "race | class | feat | item | other",
+            "description": "Flavor text and narrative description of this trait.",
+
+            "properties": {
+                "passive": true,
+                "active": false,
+                "uses": null,
+                "recharge": null
+            },
+
+            "mechanics": {
+                "advantage_on": [],
+                "disadvantage_on": [],
+                "immunities": [],
+                "resistances": [],
+                "conditions": [],
+                "bonus_saves": {},
+                "bonus_skills": {}
+            }
+        },
+    ]
+}
