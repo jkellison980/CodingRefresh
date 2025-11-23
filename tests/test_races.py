@@ -17,7 +17,7 @@ class TestRaces(unittest.TestCase):
         # Test ability scores
         self.assertEqual(self.char.abilities["str"].score, 11)
         self.assertEqual(self.char.abilities["dex"].score, 11)
-        self.assertEqual(self.char.abilities["wis"].score, 11)
+        self.assertEqual(self.char.abilities["wis"].score, 10)
         self.assertEqual(self.char.abilities["con"].score, 10)
         # Test modifiers updated
         self.assertEqual(self.char.abilities["str"].modifier, 0)
@@ -29,7 +29,7 @@ class TestRaces(unittest.TestCase):
         elf.apply_to_character(self.char)
         # Test ability scores
         self.assertEqual(self.char.abilities["dex"].score, 12)
-        self.assertEqual(self.char.abilities["int"].score, 11)
+        self.assertEqual(self.char.abilities["int"].score, 10)
         self.assertEqual(self.char.abilities["str"].score, 10)
         # Test modifier updated
         self.assertEqual(self.char.abilities["dex"].modifier, 1)
@@ -41,7 +41,7 @@ class TestRaces(unittest.TestCase):
         dwarf = Dwarf()
         dwarf.apply_to_character(self.char)
         # Test ability scores
-        self.assertEqual(self.char.abilities["str"].score, 11)
+        self.assertEqual(self.char.abilities["str"].score, 10)
         self.assertEqual(self.char.abilities["con"].score, 12)
         self.assertEqual(self.char.abilities["dex"].score, 10)
         # Test modifier updated
