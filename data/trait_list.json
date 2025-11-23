@@ -1,50 +1,92 @@
 {
-    "abilities": [
-        {
-            "id": "0",
-            "name": "Trait or Ability Name",
-            "source": "race | class | feat | item | other",
-            "description": "Flavor text and narrative description of this trait.",
-
-            "properties": {
-                "passive": true,
-                "active": false,
-                "uses": null,
-                "recharge": null
-            },
-
-            "mechanics": {
-                "advantage_on": [],
-                "disadvantage_on": [],
-                "immunities": [],
-                "resistances": [],
-                "conditions": [],
-                "bonus_saves": {},
-                "bonus_skills": {}
-            }
-        },
-        {
-            "id": "unique_trait_id",
-            "name": "Trait or Ability Name",
-            "source": "race | class | feat | item | other",
-            "description": "Flavor text and narrative description of this trait.",
-
-            "properties": {
-                "passive": true,
-                "active": false,
-                "uses": null,
-                "recharge": null
-            },
-
-            "mechanics": {
-                "advantage_on": [],
-                "disadvantage_on": [],
-                "immunities": [],
-                "resistances": [],
-                "conditions": [],
-                "bonus_saves": {},
-                "bonus_skills": {}
-            }
-        },
-    ]
+ "traits": [
+  {
+   "id": "b255dc1501af52749520024be5041574d35efd742cfe4a155d1815f806909e48",
+   "name": "Trait or Ability Name",
+   "source": "race | class | feat | item | other",
+   "description": "Flavor text and narrative description of this trait.",
+   "properties": {
+    "passive": true,
+    "active": false,
+    "uses": null,
+    "recharge": null
+   },
+   "mechanics": {
+    "advantage_on": [],
+    "disadvantage_on": [],
+    "immunities": [],
+    "resistances": [],
+    "conditions": [],
+    "bonus_saves": {},
+    "bonus_skills": {}
+   }
+  },
+  {
+   "id": "02eeede3afcfbde1d2a398ece0f016ebe9dbfea1989eb0bbbbd5aee1669853d2",
+   "name": "Fey Ancestry",
+   "source": "race",
+   "description": "Your lineage gives you advantage against being charmed and immunity to sleep.",
+   "properties": {
+    "passive": true,
+    "active": false,
+    "uses": null,
+    "recharge": null
+   },
+   "mechanics": {
+    "advantage_on": [
+     "saving_throw:charmed"
+    ],
+    "disadvantage_on": [],
+    "immunities": [
+     "sleep_magic"
+    ],
+    "resistances": [],
+    "conditions": [],
+    "bonus_saves": {},
+    "bonus_skills": {}
+   }
+  },
+  {
+   "id": "8eed3921729403128a900d02ccac51f361b59384e218f10b84d86929b2391e4e",
+   "name": "Dark Vision",
+   "source": "race",
+   "description": "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can\u2019t discern color in darkness, only shades of gray.",
+   "properties": {
+    "passive": true,
+    "active": false,
+    "uses": null,
+    "recharge": null
+   },
+   "mechanics": {
+    "advantage_on": [],
+    "disadvantage_on": [],
+    "immunities": [],
+    "resistances": [],
+    "conditions": [],
+    "bonus_saves": {},
+    "bonus_skills": {}
+   }
+  },
+  {
+   "id": "524b7712a123e7714767e6d4847eadb41cd0f3a42d4a23a4a3b013438385515f",
+   "name": "Keen Senses",
+   "source": "race",
+   "description": "You have proficiency in the Perception skill",
+   "properties": {
+    "passive": true,
+    "active": false,
+    "uses": null,
+    "recharge": null
+   },
+   "mechanics": {
+    "advantage_on": [],
+    "disadvantage_on": [],
+    "immunities": [],
+    "resistances": [],
+    "conditions": [],
+    "bonus_saves": {},
+    "bonus_skills": {}
+   }
+  }
+ ]
 }

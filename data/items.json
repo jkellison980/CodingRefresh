@@ -1,44 +1,50 @@
 {
-    "shortsword": {
-        "name": "Shortsword",
-        "type": "weapon",
-        "rarity": "common",
-        "description": "A basic shortsword.",
-        "value": 20,
-        "stats": {
-            "damage": "1d8"
-        }
-    },
-
-    "healing_potion": {
-    "name": "Healing Potion",
-    "type": "consumable",
-    "rarity": "common",
-    "description": "Restores a small amount of health.",
-    "value": 50,
-    "effects": {
-      "heal": 10
-    }
+ "items": [
+  {
+   "id": "47564edb94d9e188e11ace6efaf301b717014996158d9727e07d65b53935440e",
+   "name": "Shortsword",
+   "type": "weapon",
+   "rarity": "common",
+   "description": "A basic shortsword.",
+   "value": 20,
+   "stats": {
+    "damage": "1d8"
+   }
   },
-
-  "longsword": {
-    "name": "Longsword",
-    "type": "weapon",
-    "rarity": "uncommon",
-    "description": "A well-crafted steel longsword.",
-    "value": 150,
-    "stats": {
-      "damage": "1d8",
-      "properties": ["versatile"]
-    }
+  {
+   "id": "66e790b90f03f07eb7a601030d87b831430888208516b8c5267c03647a8639af",
+   "name": "Healing Potion",
+   "type": "consumable",
+   "rarity": "common",
+   "description": "Restores a small amount of health.",
+   "value": 50,
+   "effects": {
+    "heal": 10
+   }
   },
-
-  "chain_mail": {
-    "name": "Chain Mail",
-    "type": "armor",
-    "rarity": "common",
-    "value": 75,
-    "AC": 16,
-    "stealth_disadvantage": true
+  {
+   "id": "c47593d2cf1da5f5febca151a7f2be3a13397667a51881906b12af1ef5aa0887",
+   "name": "Longsword",
+   "type": "weapon",
+   "rarity": "uncommon",
+   "description": "A well-crafted steel longsword.",
+   "value": 150,
+   "stats": {
+    "damage": "1d10",
+    "properties": [
+     "versatile"
+    ]
+   }
+  },
+  {
+   "id": "9ad06ec617e41078ae6412dfaee37b921e750665ca1cc3668e6eae95f796ebad",
+   "name": "Chain Mail",
+   "type": "armor",
+   "rarity": "common",
+   "description": "Chain mail armor.",
+   "value": 75,
+   "AC": 16,
+   "stealth_disadvantage": true
   }
+ ]
 }
