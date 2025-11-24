@@ -1,7 +1,7 @@
-from src import Ability
-from src import Character
-from src import Race, Human, Elf, Dwarf
-from src import Character_class, Fighter, Warlock, Ranger
+from character import Ability
+from character import Character
+from character import Race, Human, Elf, Dwarf
+from character import Character_class, Fighter, Warlock, Ranger
 
 name = "Jeremy"
 
