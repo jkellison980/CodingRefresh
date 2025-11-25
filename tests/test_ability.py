@@ -1,5 +1,5 @@
 import unittest
-from src import Ability
+from character import Ability
 
 class TestAbility(unittest.TestCase):
     

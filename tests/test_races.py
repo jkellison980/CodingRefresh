@@ -1,7 +1,7 @@
 import unittest
-from src import Ability
-from src import Character
-from src import Race, Human, Elf, Dwarf
+from character import Ability
+from character import Character
+from character import Race, Human, Elf, Dwarf
 
 class TestRaces(unittest.TestCase):
 

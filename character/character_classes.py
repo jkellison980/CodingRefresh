@@ -17,12 +17,6 @@ class Character_class:
             setattr(character, feature, True)
 
 
-'''
-Fighter
-'''
-class Fighter(Character_class):
-    abilities = ["swingsword"]
-    feats = ["sentinal"]
 
 
 '''
