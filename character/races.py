@@ -24,7 +24,6 @@ Human Race
 Stats
     STR +1
     DEX +1
-    WIS +1
 
 Abilities
     TBD
@@ -46,7 +45,6 @@ class Human(Race):
 Elf Race
 Stats
     DEX +2
-    INT +1
 
 Abilities
     TBD
@@ -70,7 +68,6 @@ class Elf(Race):
 '''
 Dwarf Race
 Stats
-    STR +1
     CON +2
 
 Abilities

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from .items import Item
+from .item import Item
 
 REQUIRED_FIELDS = ["name", "type", "rarity", "description", "value"]
 

@@ -1,4 +1,5 @@
 # character/__init__.py
+#from .<filename> import <class>
 
 from .ability import Ability
 from .character import Character
